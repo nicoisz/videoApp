@@ -25,6 +25,13 @@ class LocalVideoModel {
         views: json["views"],
       );
 
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "videoUrl": videoUrl,
+        "likes": likes,
+        "views": views,
+      };
+
 
   VideoPost toVideoPostEntity() =>
       VideoPost(caption: name, videoUrl: videoUrl, likes: likes, views: views);
