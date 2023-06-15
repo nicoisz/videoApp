@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:videoapp/config/helpers.dart/human_formats.dart';
 import 'package:videoapp/domain/entities/video_post.dart';
@@ -11,32 +12,53 @@ class VideoButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-       _CustomIconButton(value: video.likes, iconData: Icons.favorite, color: Colors.red),
-       _CustomIconButton(value: video.views, iconData: Icons.remove_red_eye, color: Colors.white)
+        _CustomIconButton(
+            value: video.likes, iconData: Icons.favorite, color: Colors.red),
+        const SizedBox(
+          height: 10,
+        ),
+        _CustomIconButton(
+            value: video.views,
+            iconData: Icons.remove_red_eye,
+            color: Colors.white),
+        const SizedBox(
+          height: 10,
+        ),
+        SpinPerfect(
+            infinite: true,
+            duration: const Duration(seconds: 5),
+            child: const _CustomIconButton(
+                value: 0,
+                iconData: Icons.play_circle_outlined,
+                color: Colors.white))
       ],
     );
   }
 }
 
 class _CustomIconButton extends StatelessWidget {
-
   final int value;
   final IconData iconData;
   final Color color;
 
-  const _CustomIconButton({super.key, required this.value, required this.iconData, required this.color});
+  const _CustomIconButton(
+      {super.key,
+      required this.value,
+      required this.iconData,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-            IconButton(
+        IconButton(
             onPressed: () {},
             icon: Icon(
               iconData,
               color: color,
             )),
-            Text(HumanFormats.humanReadbleNumber(value.toDouble())),
+            if(value>0)
+        Text(HumanFormats.humanReadbleNumber(value.toDouble())),
       ],
     );
   }
